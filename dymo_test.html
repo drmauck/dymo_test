@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+    <head>
+        <title>Sample DYMO Label Plug-In</title>
+
+
+            <script src="http://labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.latest.js"
+            type="text/javascript" charset="UTF-8"></script>
+            <script type="text/javascript">
+
+
+            function OnLoad()
+            {
+                //GetCurrentPlugin();
+                GetDYMOPrinters();
+
+                //GetPaperTray();
+                //GetMRUList();
+                //GetObjectNames();
+                //GetLabelImage();
+            }
+
+
+            function GetDYMOPrinters()
+            {
+                alert(" Testing 1");
+
+                var printers = dymo.label.framework.getPrinters();
+                if (printers.length == 0)
+                throw "No DYMO printers are installed. Install DYMO printers.";
+                alert("dfdsfd");
+                var printerName = "";
+                for (var i = 0; i < printers.length; ++i)
+                {
+                    var printer = printers[i];
+                    if (printer.printerType == "LabelWriterPrinter")
+                    {
+                        printerName = printer.name;
+                        break;
+                    }
+                }
+
+            var label = DYMO.Label.Framework.Label.Open("MyText.label");
+            label.SetObjectText("NameTxt", "John Smith");
+
+            alert(" Testing 2");   // Here this alert also not working .
+            label.print("DYMO LabelWriter 310");
+            }
+     </script>
+
+    </head>
+    <body onload="OnLoad()">
+         <form action="" method="post" id="DYMOLabel">
+        <center>
+        <h2>DYMO Label  Example</h2>
+         <input type=button value="Get DYMO Printers" onClick="GetDYMOPrinters()">
+     </center>
+    </form>
+
+
+
+
+    </body>
+</html>
